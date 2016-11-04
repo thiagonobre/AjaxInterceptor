@@ -35,7 +35,7 @@
 			var applyForObserver = false;
 
 			if (typeof observer['condition'] == 'function') {
-				applyForObserver = !!(observer['condition'].call(null, xhr._method, xhr._url));
+				applyForObserver = !!(observer['condition'].call(null, xhr._method, xhr._url, xhr));
 			} else if (RegExp.prototype.isPrototypeOf(observer['condition'])) {
 				applyForObserver = !!(observer['condition'].test(xhr._method + ' ' + xhr._url))
 			}
@@ -97,18 +97,3 @@
 	}(XMLHttpRequest.prototype.open));
 
 }());
-
-/*
-AjaxInterceptor.registerObserver({
-	condition: function() {
-		return true;
-	},
-	callback: function(event, xhr) {
-
-		switch (xhr.readyState) {
-			case XMLHttpRequest.DONE:
-				break;
-		}
-	}
-});
-*/

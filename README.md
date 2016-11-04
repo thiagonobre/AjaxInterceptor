@@ -4,7 +4,7 @@ A script that allow you intercept XmlHttpRequests
 ### Embed the lib in your project and you'll be able to register the observers on requests
 ```js
 AjaxInterceptor.registerObserver({
-	condition: function(method, url) {
+	condition: function(method, url, xhr) {
 		return method == "GET";
 	},
 	callback: function(event, xhr) {
