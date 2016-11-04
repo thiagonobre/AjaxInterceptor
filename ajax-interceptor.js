@@ -1,3 +1,4 @@
+;
 (function() {
 	var observerId = 0;
 	var observers = {};
@@ -37,7 +38,8 @@
 			if (typeof observer['condition'] == 'function') {
 				applyForObserver = !!(observer['condition'].call(null, xhr._method, xhr._url, xhr));
 			} else if (RegExp.prototype.isPrototypeOf(observer['condition'])) {
-				applyForObserver = !!(observer['condition'].test(xhr._method + ' ' + xhr._url))
+				observer['condition'].lastIndex = 0;
+				applyForObserver = !!(observer['condition'].test(xhr._method + ' ' + xhr._url));
 			}
 
 			if (applyForObserver && typeof observer['callback'] == 'function') {
